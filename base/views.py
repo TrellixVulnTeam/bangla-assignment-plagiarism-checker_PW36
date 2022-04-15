@@ -17,10 +17,9 @@ class PlagView(View):
             form.doc2 = request.POST['doc2']
             form.save()
             similarity_ratio = SequenceMatcher(None,form.doc1,form.doc2).ratio()
-
-            print (similarity_ratio)
-            
-        return render(request, 'base/master.html')
+            result = similarity_ratio * 100
+           
+        return render(request, 'base/master.html', {'hello':result, 'form':form})
     
 
 
