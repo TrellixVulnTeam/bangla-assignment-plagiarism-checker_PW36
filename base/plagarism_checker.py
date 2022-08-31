@@ -399,10 +399,32 @@ class PlagiarismChecker:
                         "হোক",
                         "হয়"]
 
-    def levenshtein(text1, text2):
+    def levenshtein(self, text1, text2):
         diff = nl.edit_distance(text1, text2)
         # FORMULA
         result = (1-(diff/max(len(text1), len(text2))))*100
         result = "{:.2f}".format(result)  # taking two decimal place value only
 
         return float(result)
+    
+    def santenceSimilarity(self, text1, text2):
+        similer_text = []
+        for i in range(len(text1)):
+            for j in range(len(text2)):
+                if self.levenshtein(text1[i], text2[j]) > 70:
+                    similer_text.append(text2[i])
+
+        return similer_text
+
+    def checkIsExist(self,lists, c1, c2, length):
+        temp = 0;
+        for i in lists:
+            
+            if c1 == i :
+                temp += 1
+            if c2 == i :
+                temp += 1
+            if temp == length:
+                return False
+        return True      
+    

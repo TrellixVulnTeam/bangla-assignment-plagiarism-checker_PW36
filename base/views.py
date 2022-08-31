@@ -1,4 +1,6 @@
 from array import array
+from curses.ascii import HT
+from difflib import SequenceMatcher
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import View
@@ -7,6 +9,7 @@ import nltk
 nltk.download('punkt')
 from .pdf_convertier import PdfConvertre
 from .plagarism_checker import PlagiarismChecker
+from .image_converter import ImageConverter
 class PlagView(View):
     def get(self, request):
         return render(request, 'base/master.html')
@@ -16,12 +19,22 @@ class PlagView(View):
         
         if request.method == 'POST':
             form = Document()
-            pdf_text = PdfConvertre.converter(request.FILES.getlist("files"))
+            # file1 = request.FILES["file1"]
+            # file2 = request.FILES["file2"]
+            images1 = request.FILES["images1"]
+            images2 = request.FILES["images2"]
+            # if len(file1) > 0 and len(file2) > 0:
+            #     pdf_text1 = PdfConvertre.converter(file1)
+            #     pdf_text2 = PdfConvertre.converter(file2)
+            #     pdfPlag = PlagiarismChecker()
+            #     similerText = pdfPlag.santenceSimilarity(pdf_text1, pdf_text2)
+            #     return HttpResponse(similerText)
+
+            if len(images1) > 0 and len(images2):
+                image_converter = ImageConverter()
+                images1_text = image_converter.convert(images1)
+                images2_text = image_converter.convert(images2)
+                return HttpResponse(images1_text + images2_text)
             
-            # result = PlagiarismChecker.levenshtein(pdf_text[0], pdf_text[1])
-            return HttpResponse(pdf_text)
-            # form.save()
-            # similarity_ratio = SequenceMatcher(None,form.doc1,form.doc2).ratio()
-            # result = similarity_ratio * 100
-           
+
         # return render(request, 'base/master.html', {'hello':result, 'form':form})
