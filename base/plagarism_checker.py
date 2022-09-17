@@ -1,3 +1,4 @@
+from cgitb import text
 import nltk as nl
 import os
 import sqlite3
@@ -427,4 +428,16 @@ class PlagiarismChecker:
             if temp == length:
                 return False
         return True      
+    
+    def percentageOfText(self, text1, text2):
+        sum = 0
+        lenCount = 0
+        for i in range(len(text1)):
+            for j in range(len(text2)):
+                per= self.levenshtein(text1[i], text2[j])
+                if (per > 5):
+                    sum += per
+                    lenCount += 1
+        return sum / lenCount
+                    
     
