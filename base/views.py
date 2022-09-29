@@ -23,11 +23,8 @@ class PlagView(View):
         if request.method == 'POST':
             form = Document()
             files = request.FILES.getlist('files')
-            # file2 = request.FILES["file2"]
-            multi_file_instence = MultiFile()
-            lsit =multi_file_instence.convert_pdf_to_text_from_all_files(files)
-            result = multi_file_instence.checking_plug_all_files(list)
-            return HttpResponse(result)
+            multi_file_instence = MultiFile(files)
+            return HttpResponse(multi_file_instence.multifilePlugCheck())
 
             # 1-2, 1-3, 1-8, 2-3, 2-8, 3-8
             # images1 = request.FILES["images1"]

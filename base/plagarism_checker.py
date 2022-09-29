@@ -400,6 +400,7 @@ class PlagiarismChecker:
                         "হোক",
                         "হয়"]
 
+    # plagiarism detecting using nltk as same as sequence matcher
     def levenshtein(self, text1, text2):
         diff = nl.edit_distance(text1, text2)
         # FORMULA
@@ -408,27 +409,17 @@ class PlagiarismChecker:
 
         return float(result)
     
+    # checking every sentance where have similerities or not if then take in an array then the array will return
     def santenceSimilarity(self, text1, text2):
         similer_text = []
-        for i in range(len(text1)):
-            for j in range(len(text2)):
+        for i in range(0,len(text1)):
+            for j in range(0,len(text2)):
                 if self.levenshtein(text1[i], text2[j]) > 70:
-                    similer_text.append(text2[i])
+                    similer_text.append(text1[i])
 
-        return similer_text
-
-    def checkIsExist(self,lists, c1, c2, length):
-        temp = 0;
-        for i in lists:
-            
-            if c1 == i :
-                temp += 1
-            if c2 == i :
-                temp += 1
-            if temp == length:
-                return False
-        return True      
+        return similer_text     
     
+    # every sentence summation the percentage
     def percentageOfText(self, text1, text2):
         sum = 0
         lenCount = 0
