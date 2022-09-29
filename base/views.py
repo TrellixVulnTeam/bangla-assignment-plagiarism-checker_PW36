@@ -4,6 +4,8 @@ from difflib import SequenceMatcher
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import View
+
+from base.multi_file_to_array_text import MultiFile
 from .models import Document
 import nltk
 nltk.download('punkt')
@@ -19,17 +21,22 @@ class PlagView(View):
         
         if request.method == 'POST':
             form = Document()
-            file1 = request.FILES["file1"]
+            files = request.FILES.getlist('files')
             # file2 = request.FILES["file2"]
-        
+            multi_file_instence = MultiFile()
+            lsit =multi_file_instence.convert_pdf_to_text_from_all_files(files)
+
+            return HttpResponse(lsit)
+
+            # 1-2, 1-3, 1-8, 2-3, 2-8, 3-8
             # images1 = request.FILES["images1"]
             # images2 = request.FILES["images2"]
             # if len(file1) > 0 and len(file2) > 0:
-            #     pdf_text1 = PdfConvertre.converter(file1)
-            #     pdf_text2 = PdfConvertre.converter(file2)
-            #     pdfPlag = PlagiarismChecker()
-            #     similerText = pdfPlag.santenceSimilarity(pdf_text1, pdf_text2)
-            #     return HttpResponse(similerText)
+                # pdf_text1 = PdfConvertre.converter(file1)
+                # pdf_text2 = PdfConvertre.converter(file2)
+                # pdfPlag = PlagiarismChecker()
+                # similerText = pdfPlag.santenceSimilarity(pdf_text1, pdf_text2)
+                # return HttpResponse(similerText)
 
             # if len(images1) > 0 and len(images2):
             #     image_converter = ImageConverter()
