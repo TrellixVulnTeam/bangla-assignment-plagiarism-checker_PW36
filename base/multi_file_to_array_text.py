@@ -1,7 +1,6 @@
 from base.pdf_convertier import PdfConvertre
 from base.plagarism_checker import PlagiarismChecker
 
-
 class MultiFile:
 
     def __init__(self, files) -> None:
@@ -17,7 +16,6 @@ class MultiFile:
             items_lists.append(dic)
         return items_lists
 
-    
     def checking_plug_all_files(self, array_lists):
         result = []
         for index in range(0,len(array_lists)):
