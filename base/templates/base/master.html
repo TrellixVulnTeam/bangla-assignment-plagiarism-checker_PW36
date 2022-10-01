@@ -138,6 +138,7 @@
 
                     <br>
                     <br>
+                    {% if results %}
                     <div class="row">
                         <div class="col-md-6 mx-auto">
                             <div class="card">
@@ -165,12 +166,43 @@
                                     </tbody>
                                    </table>
                                    {% elif tab == 'home' %}
-                                   <table></table>
+                                   <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sentences</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{results.text}}</td>
+                                            <td>{{results.percen}}</td>
+                                        </tr>
+                                    </tbody>
+                                   </table>
+                                   {% else %}
+                                   <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>PDF Name</th>
+                                            <th>Sentences</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{results.between}}</td>
+                                            <td>{{results.text}}</td>
+                                            <td>{{results.percen}}</td>
+                                        </tr>
+                                    </tbody>
+                                   </table>
                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
 

@@ -33,20 +33,20 @@ class PlagView(View):
                 return render(request, 'base/master.html', {'results':res, 'tab':tab})
 
             # 1-2, 1-3, 1-8, 2-3, 2-8, 3-8
-            # images1 = request.FILES["images1"]
-            # images2 = request.FILES["images2"]
-            # if len(file1) > 0 and len(file2) > 0:
-                # pdf_text1 = PdfConvertre.converter(file1)
-                # pdf_text2 = PdfConvertre.converter(file2)
-                # pdfPlag = PlagiarismChecker()
-                # similerText = pdfPlag.santenceSimilarity(pdf_text1, pdf_text2)
-                # return HttpResponse(similerText)
+            file1 = request.FILES["file1"]
+            file2 = request.FILES["file2"]
+            if file1 and file2:
+                tab = 'two_pdf'
+                pdf_text1 = PdfConvertre.converter(file1)
+                pdf_text2 = PdfConvertre.converter(file2)
+                pdfPlag = PlagiarismChecker()
+                similerText = pdfPlag.santenceSimilarity(pdf_text1, pdf_text2)
+                percentage = pdfPlag.percentageOfText(pdf_text1, pdf_text2)
+                dic = {'between':file1.name + " " + file2.name,'text':similerText, 'percen': percentage}
+                return render(request, 'base/master.html', {'results':dic, 'tab':tab})
 
-            # if len(images1) > 0 and len(images2):
-            #     image_converter = ImageConverter()
-            #     images1_text = image_converter.convert(images1)
-            #     images2_text = image_converter.convert(images2)
-            #     return HttpResponse(images1_text + images2_text)
+            # if request.doc1 and request.doc2:
+
             
 
         # return render(request, 'base/master.html', {'hello':result, 'form':form})
