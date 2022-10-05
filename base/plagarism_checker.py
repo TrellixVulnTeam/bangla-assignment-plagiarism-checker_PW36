@@ -422,13 +422,23 @@ class PlagiarismChecker:
     # every sentence summation the percentage
     def percentageOfText(self, text1, text2):
         sum = 0
-        lenCount = 0
         for i in range(len(text1)):
+            pre = 0
             for j in range(len(text2)):
-                per= self.levenshtein(text1[i], text2[j])
-                if (per > 5):
-                    sum += per
-                    lenCount += 1
-        return sum / lenCount
+                par= self.levenshtein(text1[i], text2[j])
+                if (par > pre):
+                    pre = par
+            sum += pre
+        return "{:.2f}".format(sum / len(text1))
+
+    # text pliting by end key |
+    def textSplit(self, texts):
+        return texts.split("।")
+    
+    # text plugCheck
+    def plugCheckFromTextArray(self, textArray1, textArray2):
+        similer_text = self.santenceSimilarity(textArray1, textArray2)
+        percentage = self.percentageOfText(textArray1, textArray2)
+        return [similer_text, percentage];
                     
     

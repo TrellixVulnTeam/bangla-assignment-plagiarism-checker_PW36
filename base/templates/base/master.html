@@ -53,6 +53,12 @@
                                       
                                     </li>
                                   </ul>
+
+                                  <div>
+                                    <a href="{% url 'plag' %}" class="btn btn-success mx-2">
+                                        Refresh
+                                    </a>
+                                  </div>
                             </div>
 
                         </nav>
@@ -159,7 +165,11 @@
                                         {% for res in results %}
                                             <tr>
                                                 <td>{{res.between}}</td>
-                                                <td>{{res.text}}</td>
+                                                <td>
+                                                    {% for text in res.text %}
+                                                        <p>{{text}}</p>
+                                                    {% endfor %}
+                                                </td>
                                                 <td>{{res.percen}}</td>
                                             </tr>
                                         {% endfor %}
@@ -175,7 +185,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{results.text}}</td>
+                                            <td>
+                                                {% for text in results.text %}
+                                                    <p>{{text}}</p>
+                                                {% endfor %}
+                                            </td>
                                             <td>{{results.percen}}</td>
                                         </tr>
                                     </tbody>
@@ -192,7 +206,11 @@
                                     <tbody>
                                         <tr>
                                             <td>{{results.between}}</td>
-                                            <td>{{results.text}}</td>
+                                            <td>
+                                                {% for text in results.text %}
+                                                    <p>{{text}}</p>
+                                                {% endfor %}
+                                            </td>
                                             <td>{{results.percen}}</td>
                                         </tr>
                                     </tbody>

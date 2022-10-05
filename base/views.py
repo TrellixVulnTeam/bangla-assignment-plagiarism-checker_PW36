@@ -2,6 +2,7 @@ from array import array
 from ast import And
 from curses.ascii import HT
 from difflib import SequenceMatcher
+from pydoc import doc
 from unittest import result
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -24,6 +25,15 @@ class PlagView(View):
         
         if request.method == 'POST':
             tab = "home"
+
+            doc1 = request.POST.get('doc1', False)
+            doc2 = request.POST.get('doc2', False)
+            if doc1 and doc2:
+                pdfPlag = PlagiarismChecker()
+                arrayOfResult = pdfPlag.plugCheckFromTextArray(pdfPlag.textSplit(doc1), pdfPlag.textSplit(doc2))
+                dic = {'text':arrayOfResult[0], 'percen': arrayOfResult[1]}
+                return render(request, 'base/master.html', {'results':dic, 'tab':tab, 'form':{doc1:doc1, doc2:doc2}})
+
             multifiles = request.FILES.getlist('files')
             if multifiles and len(multifiles) > 2:
                 tab = 'multi'
@@ -33,19 +43,19 @@ class PlagView(View):
                 return render(request, 'base/master.html', {'results':res, 'tab':tab})
 
             # 1-2, 1-3, 1-8, 2-3, 2-8, 3-8
-            file1 = request.FILES["file1"]
-            file2 = request.FILES["file2"]
-            if file1 and file2:
+            file1 = request.FILES['file1']
+            file2 = request.FILES['file2']
+            if len(file1) > 0 and len(file2) > 0:
                 tab = 'two_pdf'
-                pdf_text1 = PdfConvertre.converter(file1)
-                pdf_text2 = PdfConvertre.converter(file2)
+                pdf_text1 = PdfConvertre.converter(request.FILES["file1"])
+                pdf_text2 = PdfConvertre.converter(request.FILES["file2"])
                 pdfPlag = PlagiarismChecker()
                 similerText = pdfPlag.santenceSimilarity(pdf_text1, pdf_text2)
                 percentage = pdfPlag.percentageOfText(pdf_text1, pdf_text2)
                 dic = {'between':file1.name + " " + file2.name,'text':similerText, 'percen': percentage}
                 return render(request, 'base/master.html', {'results':dic, 'tab':tab})
 
-            # if request.doc1 and request.doc2:
+
 
             
 
