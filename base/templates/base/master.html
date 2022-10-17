@@ -52,6 +52,9 @@
                                         {% endif %}
                                       
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link {% if tab == 'one_to_many' %} active {% endif %}" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">One to Many</button>
+                                    </li>
                                   </ul>
 
                                   <div>
@@ -65,6 +68,7 @@
                     </div>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade {% if tab == 'home' %} show active {% endif %}" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <!-- only bangla text -->
                             <form class="" enctype="multipart/form-data" method="post">
                                 {% csrf_token %}
                                 <div class="row my-4">
@@ -104,6 +108,7 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- single file -->
                         <div class="tab-pane fade {% if tab == 'two_pdf' %} show active {% endif %}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="my-5">
                                 <p class="text-center">Upload Two Bangla PDF for checking the plagiarism between two pdf</p>
@@ -123,6 +128,7 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- multiple file -->
                         <div class="tab-pane fade {% if tab == 'multi' %} show active {% endif %}" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="my-5">
                                 <p class="text-center">Upload 2 or more Bangla PDF for checking the plagiarism between all pdf</p>
@@ -132,6 +138,28 @@
                                 <div class="row flex-row">
                                     <div class="form-group col-md-6 mx-auto">
                                         <input type="file" multiple name="files" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group w-100 d-flex justify-content-center align-items-center">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block w-50 ">Check</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- one to many -->
+                        <div class="tab-pane fade {% if tab == 'one_to_many' %} show active {% endif %}" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="my-5">
+                                <p class="text-center">Upload a Pdf file to check with multiple pdf</p>
+                            </div>
+                            <form class="" enctype="multipart/form-data" method="post">
+                                {% csrf_token %}
+                                <div class="row flex-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="singleFile">Single PDF</label>
+                                        <input type="file" name="singleFile" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="singleFile">Multiple PDF</label>
+                                        <input type="file" multiple name="multiFile" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group w-100 d-flex justify-content-center align-items-center">

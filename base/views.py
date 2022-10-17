@@ -55,6 +55,15 @@ class PlagView(View):
                 dic = {'between':file1.name + " " + file2.name,'text':similerText, 'percen': percentage}
                 return render(request, 'base/master.html', {'results':dic, 'tab':tab})
 
+            singleFile = request.FILES('singleFile')
+            multiFile = request.FILES.getlist('multiFile')
+            if singleFile and len(multiFile) > 0:
+                tab = 'one_to_many' 
+                single_pdf_text = PdfConvertre.converter(singleFile)
+                mulple_file_instance = MultiFile(multiFile)
+                plag_result = mulple_file_instance.single_file_to_multifile_plug_check(single_pdf_text, singleFile.name, multi_file_instence.convert_pdf_to_text_from_all_files()) 
+                return render(request, 'base/master.html', {'results':dic, 'tab':tab})
+
 
 
             
