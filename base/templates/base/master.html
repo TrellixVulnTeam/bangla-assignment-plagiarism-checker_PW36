@@ -53,7 +53,7 @@
                                       
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link {% if tab == 'one_to_many' %} active {% endif %}" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">One to Many</button>
+                                        <button class="nav-link {% if tab == 'one_to_many' %} active {% endif %}" id="oneToMeny-tab" data-toggle="tab" data-target="#oneToMeny" type="button" role="tab" aria-controls="oneToMeny" aria-selected="false">One to Many</button>
                                     </li>
                                   </ul>
 
@@ -146,7 +146,7 @@
                             </form>
                         </div>
                         <!-- one to many -->
-                        <div class="tab-pane fade {% if tab == 'one_to_many' %} show active {% endif %}" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="tab-pane fade {% if tab == 'one_to_many' %} show active {% endif %}" id="oneToMeny" role="tabpanel" aria-labelledby="oneToMeny-tab">
                             <div class="my-5">
                                 <p class="text-center">Upload a Pdf file to check with multiple pdf</p>
                             </div>
@@ -222,6 +222,31 @@
                                         </tr>
                                     </tbody>
                                    </table>
+                                   {% elif tap == one_to_many %}
+                                   <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>PDF Name</th>
+                                            <th>Sentences</th>
+                                            <th>Percentage</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for res in results %}
+                                        <tr>
+                                            <td>{{res.between}}</td>
+                                            <td>
+                                                {% for text in res.text %}
+                                                    <p>{{text}}</p>
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{res.percen}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                   </table>
+
+                                   <!-- one file with multiple file checker result show -->
                                    {% else %}
                                    <table class="table">
                                     <thead>

@@ -30,13 +30,14 @@ class MultiFile:
     def multifilePlugCheck(self):
         return self.checking_plug_all_files(self.convert_pdf_to_text_from_all_files())
 
-    def single_file_to_multifile_plug_check(self, single_file, single_file_name, mullti_file):
+    def single_file_to_multifile_plug_check(self, single_file, single_file_name):
         result = []
+        mullti_file = self.convert_pdf_to_text_from_all_files()
         for file in mullti_file:
             pdfPlug = PlagiarismChecker()
             similer_text = pdfPlug.santenceSimilarity(file['text_array'], single_file)
-            percentage = pdfPlug.santenceSimilarity(file['text_array'], single_file)
-            if similer_text and percentage > 50:
+            percentage = pdfPlug.percentageOfText(file['text_array'], single_file)
+            if len(similer_text) > 0:
                 dic = {'between':single_file_name + " " + file['name'],'text':similer_text, 'percen': percentage}
                 result.append(dic)
         return result
