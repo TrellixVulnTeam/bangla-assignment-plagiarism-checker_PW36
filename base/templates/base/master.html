@@ -18,13 +18,13 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container my-5">
             <div class="row">
                 <div class="col-md-12">
                     <div>
                         <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between align-items-center">
                             <div>
-                                <a class="navbar-brand" href="#">বাংলা অ্যাসাইনমেন্ট প্লেগারিজম টেস্টার</a>
+                                <a class="navbar-brand" href="{% url 'plag' %}" >বাংলা অ্যাসাইনমেন্ট প্লেগারিজম টেস্টার</a>
                             </div>
 
                             <div class="form-inline my-2 my-lg-0">
@@ -67,9 +67,12 @@
                         </nav>
                     </div>
                     <div class="tab-content" id="myTabContent">
+                        {% if error %}
+                        <span>{{error}}</span>
+                        {% endif %}
                         <div class="tab-pane fade {% if tab == 'home' %} show active {% endif %}" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <!-- only bangla text -->
-                            <form class="" enctype="multipart/form-data" method="post">
+                            <form class="" content='text/html; charset=UTF-8' method="post">
                                 {% csrf_token %}
                                 <div class="row my-4">
         
@@ -169,7 +172,6 @@
                         </div>
                       </div>
 
-
                     <br>
                     <br>
                     {% if results %}
@@ -178,6 +180,7 @@
                             <div class="card">
                                 <div class="card-header text-center">
                                     <h3>রিপোর্ট</h3>
+                                    
                                 </div>
                                 <div class="card-body">
                                 {% if tab == 'multi' %}
@@ -222,7 +225,7 @@
                                         </tr>
                                     </tbody>
                                    </table>
-                                   {% elif tap == one_to_many %}
+                                   {% elif tap == 'one_to_many' %}
                                    <table class="table">
                                     <thead>
                                         <tr>
@@ -245,9 +248,8 @@
                                     {% endfor %}
                                     </tbody>
                                    </table>
-
-                                   <!-- one file with multiple file checker result show -->
                                    {% else %}
+                                   
                                    <table class="table">
                                     <thead>
                                         <tr>
