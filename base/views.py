@@ -14,7 +14,6 @@ import nltk
 nltk.download('punkt')
 from .pdf_convertier import PdfConvertre
 from .plagarism_checker import PlagiarismChecker
-from .image_converter import ImageConverter
 class PlagView(View):
     def get(self, request):
 

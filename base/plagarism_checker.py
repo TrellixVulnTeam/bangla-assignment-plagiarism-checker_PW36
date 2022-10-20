@@ -1,8 +1,5 @@
-from cgitb import text
 import nltk as nl
-import os
-import sqlite3
-import re
+
 
 class PlagiarismChecker:
     bangla_stopwords = ["অতএব",

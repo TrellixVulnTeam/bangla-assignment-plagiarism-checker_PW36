@@ -1,12 +1,6 @@
 from tempfile import TemporaryDirectory
-from pathlib import Path
-from django.core.files import File
-from nltk.tokenize import sent_tokenize
-import nltk as nl
-import pytesseract
 from pdf2image import convert_from_bytes
 from .image_converter import ImageConverter
-from PIL import Image
 class PdfConvertre:
     
     def converter (pdf) -> None:
