@@ -24,7 +24,6 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -44,7 +43,7 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#acknowledgments">Dependencies</a></li>
   </ol>
 </details>
 
@@ -91,7 +90,7 @@ Use some package and trained data for this application.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@Safiullah](https://www.linkedin.com/in/md-safiullah-2b1408162/) - safiul7303@gmail.com
+Linkedin Profile - [@Safiullah](https://www.linkedin.com/in/md-safiullah-2b1408162/) - safiul7303@gmail.com
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
