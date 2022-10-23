@@ -1,15 +1,8 @@
-from array import array
-from ast import And
-from curses.ascii import HT
-from difflib import SequenceMatcher
-from pydoc import doc
-from unittest import result
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import View
-
 from base.multi_file_to_array_text import MultiFile
-from .models import Document
 import nltk
 nltk.download('punkt')
 from .pdf_convertier import PdfConvertre
